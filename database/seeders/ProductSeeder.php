@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
-    //TODO Исправить 'category_id' !!!
+
     public function run()
     {
         DB::table('products')->insert([
