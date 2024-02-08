@@ -15,7 +15,7 @@ class Category extends Model
         'type',
         'author'
     ];
-    public function products(): BelongsToMany
+    public function product(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }

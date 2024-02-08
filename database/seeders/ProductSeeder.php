@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class ProductSeeder extends Seeder
 {
 
-    public function run()
+    public function run(): void
     {
         DB::table('products')->insert([
             [
