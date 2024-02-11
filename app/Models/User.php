@@ -26,4 +26,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //шифруем пароль
+    public function setPasswordAttribute($value): string
+    {
+        return $this->attributes['password'] = bcrypt($value);
+    }
 }
