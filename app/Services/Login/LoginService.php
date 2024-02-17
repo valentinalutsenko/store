@@ -3,38 +3,30 @@
 namespace App\Services\Login;
 
 use App\Http\Requests\LoginRequest;
-use http\Env\Request;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginService
 {
     public function loginUser(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->getCredentials();
+        $credentials = $request->only('email', 'password');
 
-        if(!Auth::validate($credentials)){
-            return redirect()->to('login')
-                             ->withErrors(trans('auth.failed'));
+        if(Auth::attempt($credentials)){
+            return redirect()->to('api/dashboard')->with('success', 'Your message has been sent!');
         };
 
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-        Auth::login($user);
-
-        return $this->authenticated($request, $user);
+        return redirect()->to('api/login')->with('Error! The entered data is incorrect');
     }
 
-//    public function perform()
-//    {
-//        Session::flush();
-//
-//        Auth::logout();
-//
-//        return redirect('login');
-//    }
-
-    protected function authenticated(Request $request, $user): RedirectResponse
+    public function logout(): RedirectResponse
     {
-        return redirect()->intended();
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect('api/login');
     }
 }

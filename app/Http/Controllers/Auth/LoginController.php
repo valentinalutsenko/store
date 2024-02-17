@@ -7,8 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Services\Login\LoginService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use MongoDB\Driver\Session;
+
 
 
 class LoginController extends Controller
@@ -17,15 +16,13 @@ class LoginController extends Controller
     {
         $this->loginService = $loginService;
     }
-    public function login( LoginRequest $request): RedirectResponse
+    public function login(LoginRequest $request): RedirectResponse
     {
         return $this->loginService->loginUser($request);
     }
 
-    public function perform(): RedirectResponse
+    public function logout(): RedirectResponse
     {
-        Auth::logout();
-
-        return redirect('login');
+        return $this->loginService->logout();
     }
 }
