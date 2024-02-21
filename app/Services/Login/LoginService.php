@@ -3,22 +3,22 @@
 namespace App\Services\Login;
 
 use App\Http\Requests\LoginRequest;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class LoginService
 {
-    public function loginUser(LoginRequest $request): RedirectResponse
+    public function loginUser(LoginRequest $request): Response
     {
         $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)){
-            return redirect()->to('api/dashboard')->with('success', 'Your message has been sent!');
+        if(!Auth::attempt($credentials)){
+            return response()->json('Данные введены неверно!', 400);
         };
+        return response()->json('Вы успешно автризовались!', 200);
 
-        return redirect()->to('api/login')->with('Error! The entered data is incorrect');
     }
 
     public function logout(): RedirectResponse
@@ -27,6 +27,7 @@ class LoginService
 
         Auth::logout();
 
-        return redirect('api/login');
+        return redirect('login');
     }
 }
+

@@ -2,18 +2,19 @@
 
 namespace App\Services\Products;
 
-use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
+
 class ProductService
 {
-    public function createProduct(): object
+    public function getAllProducts($products): object
     {
-        $products = Product::all();
-        return ProductResource::collection($products);
+       $products = Product::with('products')->find($products);
+      dd($products);
+//       return $products;
 
     }
     public function getProduct($id): object
     {
-        return Product::where('id', $id)->first();
+        return Product::with('category')->where('title', $id)->first();
     }
 }

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +34,14 @@ class ProductSeeder extends Seeder
                 'price' => 89990,
                 'image' => '',
                 'category_id' => Category::find(3)->id
+
+            ],
+            [
+                'title' => 'Ноутбук игровой HP',
+                'description' => 'Экран также поддерживает популярные цветовые охваты sRGB, NTSC и Adobe RGB, поэтому на нем можно заниматься редактированием фотографий в Photoshop или других графических приложениях. Матрица с Full HD-разрешением подойдет также для просмотра видеоконтента и серфинга в веб-браузере: картинка будет четкой и максимально детализированной.',
+                'price' => 75990,
+                'image' => '',
+                'category_id' => Category::find(4)->id
 
             ],
 

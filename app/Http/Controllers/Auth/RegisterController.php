@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Services\Registers\RegisterService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
+
 
 
 
@@ -16,7 +16,7 @@ class RegisterController extends Controller
     {
         $this->registerService = $registerService;
     }
-    public function register(RegisterRequest $request): RedirectResponse
+    public function register(RegisterRequest $request): Response
     {
         return $this->registerService->registerUser($request);
     }

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
 use App\Services\Login\LoginService;
 use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+
 
 
 
@@ -16,7 +17,7 @@ class LoginController extends Controller
     {
         $this->loginService = $loginService;
     }
-    public function login(LoginRequest $request): RedirectResponse
+    public function login(LoginRequest $request): Response
     {
         return $this->loginService->loginUser($request);
     }

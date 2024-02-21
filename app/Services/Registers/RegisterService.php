@@ -2,26 +2,29 @@
 
 namespace App\Services\Registers;
 
+use App\DTO\RegisterForm;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class RegisterService
 {
-    public function registerUser(RegisterRequest $request): RedirectResponse
+
+    public function registerUser(RegisterRequest $request): Response
     {
         $user = User::create($request->validated());
-        auth()->login($user);
-
-        return redirect('/api')->with('Учетная запись успешно зарегестированна');
+        return response()->json('Учетная запись успешно зарегестированна', 200);
     }
 }
 
 
-//{
-//    "name": "",
-//    "email": "@mail.ru",
-//    "password": "12345678",
-//    "password_confirmation": "12345678"
-//}
+//TODO: пробовала сделать через DTO, не смогла до конца разобраться, оставила старый вариант регистрации
+
+//    public function registerUser(RegisterForm $request): Response
+//    {
+//        $data = RegisterForm::formRequest($request);
+//        $user = User::create($data);
+//        return response('Учетная запись успешно зарегестированна', 200);
+//    }
+

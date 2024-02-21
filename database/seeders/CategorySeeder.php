@@ -25,6 +25,11 @@ class CategorySeeder extends Seeder
                 'title' => 'Ноутбуки',
                 'type' => 'Ноутбуки и компьютеры',
                 'author' => 'Admin 2'
+            ],
+            [
+                'title' => 'Ноутбуки',
+                'type' => 'Ноутбуки и компьютеры',
+                'author' => 'Admin 2'
             ]
         ]);
     }
