@@ -2,7 +2,6 @@
 
 namespace App\Services\Registers;
 
-use App\DTO\RegisterForm;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;

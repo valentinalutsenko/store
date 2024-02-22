@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Product\ProductCollection;
-use App\Models\Product;
+use App\Http\Resources\Product\ProductResource;
 use App\Services\Products\ProductService;
-use http\Env\Response;
+
 
 class ProductController extends Controller
 {
@@ -15,9 +14,9 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
     //Получаем все товары
-    public function store(ProductCollection $request)
+    public function store(): object
     {
-        return $this->productService->getAllProducts($request);
+        return $this->productService->getAllProducts();
     }
     //Получаем один товар
     public function show($id)
