@@ -11,13 +11,13 @@ class BasketService
     //Сохранение заказа в БД
     public function saveOrder(BasketFormRequest $request)
     {
-        if(!$request->validated()){
+        if (!$request->validated()) {
             return response()->json('Упс, что то пошло не так :(', 400);
         }
 
         //сохраняем заказ после успешной валидации
         $basket = Basket::getBasket();
-        $user_id = auth()->check() ? auth()->user()->id : null;
+        $user_id = auth()->check() ? $request->user()->id : null;
         $order = Order::create(
             $request->all() + ['amount' => $basket->getAmount(), 'user_id' => $user_id]
         );
@@ -30,9 +30,10 @@ class BasketService
                 'quantity' => $product->pivot->quantity,
                 'cost' => $product->price * $product->pivot->quantity,
             ]);
-            //очещаем корзину
+            //очищаем корзину
             $basket->delete();
 
             return response()->json('Заказ успешно оформлен!', 200);
+        }
     }
 }

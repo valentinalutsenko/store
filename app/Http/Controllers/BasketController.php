@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Basket\BasketFormRequest;
 use App\Services\Basket\BasketService;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,8 @@ class BasketController extends Controller
         $this->basketService = $basketService;
     }
 
-//    public function store(): object
-//    {
-//        return $this->basketService->;
-//    }
+    public function store(BasketFormRequest $request): object
+    {
+        return $this->basketService->saveOrder($request);
+    }
 }

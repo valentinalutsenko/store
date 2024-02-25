@@ -5,7 +5,7 @@ use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BasketController;
 use Illuminate\Http\Request;
 
 
@@ -23,6 +23,8 @@ Route::get('/register', [RegisterController::class, 'register']);
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/login', [LoginController::class, 'login']);
+
+Route::get('/basket', [BasketController::class, 'store']);
 
 
 
