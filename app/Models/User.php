@@ -16,6 +16,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     protected $hidden = [
@@ -31,5 +32,15 @@ class User extends Authenticatable
     public function setPasswordAttribute($value): string
     {
         return $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function isAdmin(): bool
+    {
+        $admin_emails = config('settings.admin_emails');
+        if(in_array($this->email, $admin_emails)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

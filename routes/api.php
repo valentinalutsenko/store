@@ -1,18 +1,19 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Basket\BasketController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Products\ProductController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BasketController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminHomeController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+//User
 Route::get('/', [IndexController::class, 'index']);
 
 Route::get('/products', [ProductController::class, 'store']);
@@ -26,6 +27,11 @@ Route::get('/login', [LoginController::class, 'login']);
 
 Route::get('/basket', [BasketController::class, 'store']);
 
+//Admin
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/', [AdminHomeController::class, 'index']);
+
+});
 
 
 

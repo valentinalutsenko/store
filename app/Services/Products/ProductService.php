@@ -17,5 +17,4 @@ class ProductService
         $product = Product::find($id);
         return $product;
     }
-
 }

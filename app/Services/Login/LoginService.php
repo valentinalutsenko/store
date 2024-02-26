@@ -17,14 +17,16 @@ class LoginService
         if(!Auth::attempt($credentials)){
             return response()->json('Данные введены неверно!', 400);
         };
+
+        if(Auth::check() && Auth::user()->isAdmin()) {
+            return response()->json('Вы успешно вошли на страницу администатора!', 200);
+        }
         return response()->json('Вы успешно автризовались!', 200);
 
     }
 
     public function logout(): RedirectResponse
     {
-        Session::flush();
-
         Auth::logout();
 
         return redirect('login');
