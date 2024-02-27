@@ -8,6 +8,7 @@ use App\Http\Controllers\Products\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\AdminProductController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -29,7 +30,8 @@ Route::get('/basket', [BasketController::class, 'store']);
 
 //Admin
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::get('/', [AdminHomeController::class, 'index']);
+    Route::get('/admin', [AdminHomeController::class, 'index']);
+    Route::get('/admin/products', [AdminProductController::class, 'store']);
 
 });
 

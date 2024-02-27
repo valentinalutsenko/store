@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Admin\ProductAdminService;
+use Illuminate\Support\Collection;
 
 class AdminProductController extends Controller
 {
@@ -12,9 +13,9 @@ class AdminProductController extends Controller
         $this->productAdminService = $productAdminService;
     }
 
-    public function store()
+    public function store(): Collection
     {
-
+        return $this->productAdminService->getAllProduct();
     }
 
 }

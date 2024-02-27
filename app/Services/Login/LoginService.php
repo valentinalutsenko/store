@@ -6,7 +6,7 @@ use App\Http\Requests\LoginRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+
 
 class LoginService
 {
@@ -18,9 +18,10 @@ class LoginService
             return response()->json('Данные введены неверно!', 400);
         };
 
-        if(Auth::check() && Auth::user()->isAdmin()) {
+        if(Auth::check() && Auth::user()->is_admin) {
             return response()->json('Вы успешно вошли на страницу администатора!', 200);
         }
+
         return response()->json('Вы успешно автризовались!', 200);
 
     }
