@@ -23,7 +23,6 @@ class LoginService
         }
 
         return response()->json('Вы успешно автризовались!', 200);
-
     }
 
     public function logout(): RedirectResponse

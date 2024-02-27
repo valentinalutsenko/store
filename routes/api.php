@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\Product\AdminAddProductController;
+use App\Http\Controllers\Admin\Product\AdminDeleteProductController;
+use App\Http\Controllers\Admin\Product\AdminProductController;
+use App\Http\Controllers\Admin\Product\AdminUpdateProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Basket\BasketController;
@@ -7,8 +12,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Products\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminHomeController;
-use App\Http\Controllers\Admin\AdminProductController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -29,10 +32,12 @@ Route::get('/login', [LoginController::class, 'login']);
 Route::get('/basket', [BasketController::class, 'store']);
 
 //Admin
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::get('/admin', [AdminHomeController::class, 'index']);
-    Route::get('/admin/products', [AdminProductController::class, 'store']);
-
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', [AdminHomeController::class, 'index']);
+    Route::get('/products', [AdminProductController::class, 'store']);
+    Route::get('/product/add', [AdminAddProductController::class, 'store']);
+    Route::get('/product/update', [AdminUpdateProductController::class, 'store']);
+    Route::get('/product/delete', [AdminDeleteProductController::class, 'store']);
 });
 
 
