@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 
-class ProductAdminService
+class AdminProductService
 {
     //Просмотр всех товаров
     public function getAllProduct(): Collection
