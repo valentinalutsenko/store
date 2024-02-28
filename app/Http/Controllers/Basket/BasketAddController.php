@@ -14,8 +14,8 @@ class BasketAddController extends Controller
         $this->basketService = $basketService;
     }
 
-    public function store(Request $request, $id): JsonResponse
+    public function store(Request $request): JsonResponse
     {
-        return $this->basketService->addBasket($request, $id);
+        return $this->basketService->addBasket($request);
     }
 }

@@ -31,7 +31,7 @@ Route::get('/products', [ProductController::class, 'store']);
 Route::get('/product/{id}', [ProductController::class, 'show']);
 //Корзина
 Route::get('/basket', [BasketController::class, 'store']);
-Route::get('/basket/add/{id}', [BasketAddController::class, 'store']);
+Route::post('/basket/add', [BasketAddController::class, 'store']);
 
 //Admin
 Route::group(['prefix' => 'admin'], function () {
