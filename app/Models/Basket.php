@@ -4,18 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Basket extends Model
 {
     use HasFactory;
 
-    //расчитываем сумму корзины
-    public function getAmount()
+    public function products(): BelongsToMany
     {
-        $amount = 0.0;
-        foreach ($this->products as $product) {
-            $amount = $amount + $product->price * $product->pivot->quantity;
-        }
-        return $amount;
+        return $this->belongsToMany(Product::class)->withPivot('quantity');
     }
 }

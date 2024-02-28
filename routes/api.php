@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Basket\BasketController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Products\ProductController;
+use App\Http\Controllers\Basket\BasketAddController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,16 +21,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //User
 Route::get('/', [IndexController::class, 'index']);
 
-Route::get('/products', [ProductController::class, 'store']);
-Route::get('/product/{id}', [ProductController::class, 'show']);
-
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/register', [RegisterController::class, 'register']);
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/login', [LoginController::class, 'login']);
-
+//Товары
+Route::get('/products', [ProductController::class, 'store']);
+Route::get('/product/{id}', [ProductController::class, 'show']);
+//Корзина
 Route::get('/basket', [BasketController::class, 'store']);
+Route::get('/basket/add/{id}', [BasketAddController::class, 'store']);
 
 //Admin
 Route::group(['prefix' => 'admin'], function () {
