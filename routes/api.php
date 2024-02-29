@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Order\AdminOrderShowController;
+use App\Http\Controllers\Products\ProductAllController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\Product\AdminAddProductController;
@@ -15,7 +16,6 @@ use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Basket\BasketAddController;
 
 
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -24,8 +24,8 @@ Route::get('/', [IndexController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 //Товары
-Route::get('/products', [ProductController::class, 'store']);
-Route::get('/product/{id}', [ProductController::class, 'show']);
+Route::get('/products', [ProductAllController::class, 'store']);
+Route::get('/product/{id}', [ProductController::class, 'store']);
 //Корзина
 Route::post('/basket/add', [BasketAddController::class, 'store']);
 Route::post('/basket/saveOrder', [OrderSaveController::class, 'store'] );

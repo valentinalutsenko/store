@@ -2,14 +2,10 @@
 
 namespace App\Http\Requests\Order;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseRequest;
 
-class OrderFormRequest extends FormRequest
+class OrderFormRequest extends BaseRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
     public function rules(): array
     {
         return [

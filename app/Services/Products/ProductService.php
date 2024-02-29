@@ -4,10 +4,11 @@ namespace App\Services\Products;
 
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductService
 {
-    public function getAllProducts(): object
+    public function getAllProducts(): ResourceCollection
     {
         $products = Product::all();
         return ProductResource::collection($products);

@@ -7,15 +7,15 @@ use App\Services\Products\ProductService;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 
-class ProductController extends Controller
+class ProductAllController extends Controller
 {
     public function __construct(private ProductService $productService)
     {
         $this->productService = $productService;
     }
-    //Получаем один товар
-    public function store($id): ResourceCollection
+    //Получаем все товары
+    public function store(): ResourceCollection
     {
-        return $this->productService->getProduct($id);
+        return $this->productService->getAllProducts();
     }
 }
