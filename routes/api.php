@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Admin\Order\AdminOrderShowController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\Product\AdminAddProductController;
@@ -30,10 +32,11 @@ Route::post('/basket/saveOrder', [OrderSaveController::class, 'store'] );
 //Admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminHomeController::class, 'index']);
-    Route::get('/products', [AdminProductController::class, 'store']);
+    Route::get('/products', [AdminProductController::class, 'show']);
     Route::post('/product/add', [AdminAddProductController::class, 'store']);
     Route::post('/product/update', [AdminUpdateProductController::class, 'store']);
     Route::post('/product/delete', [AdminDeleteProductController::class, 'store']);
+    Route::get('/order/orderItems', [AdminOrderShowController::class, 'show']);
 });
 
 

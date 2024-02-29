@@ -13,7 +13,7 @@ class AdminProductController extends Controller
         $this->productAdminService = $productAdminService;
     }
 
-    public function store(): Collection
+    public function show(): Collection
     {
         return $this->productAdminService->getAllProduct();
     }
