@@ -21,11 +21,11 @@ class BasketService
         }else {
             // Если корзина уже существует, получаем объект корзины
             $basket = Basket::find($basket_id);
-            // обновляем поле `updated_at` таблицы `baskets`
+            // обновляем поле updated_at таблицы baskets
             $basket->touch();
         }
 
-        if($basket->products->contains($request->id)) {
+        if($basket->products->contains($request)) {
             // если такой товар есть в корзине — изменяем кол-во
             $pivotRow = $basket->products->where('product_id', $request->id)->first()->pivot;
             $quantity = $pivotRow->quantity + $quantity;

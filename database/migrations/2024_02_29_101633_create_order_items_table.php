@@ -8,11 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('basket_product', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('quantity');
-            $table->foreignId('basket_id')
-                ->constrained('baskets')
+            $table->string('name', 100);
+            $table->decimal('price', 10, 2)->unsigned();
+            $table->tinyInteger('quantity')->unsigned()->default(1);
+            $table->decimal('cost', 10, 2)->unsigned();
+            $table->foreignId('order_id')
+                ->constrained('orders')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('product_id')
@@ -24,6 +27,6 @@ return new class extends Migration
     }
     public function down(): void
     {
-        Schema::dropIfExists('basket_product');
+        Schema::dropIfExists('order_items');
     }
 };

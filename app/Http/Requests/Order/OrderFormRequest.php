@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Basket;
+namespace App\Http\Requests\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BasketFormRequest extends FormRequest
+class OrderFormRequest extends FormRequest
 {
     public function authorize(): bool
     {
