@@ -13,9 +13,10 @@ class AdminProductController extends Controller
         $this->productAdminService = $productAdminService;
     }
 
-    public function show(): Collection
+    public function show(): ProductResponse
     {
-        return $this->productAdminService->getAllProduct();
+        $product = $this->productAdminService->getAllProduct();
+        return new ProductResponse($product);
     }
 
 }

@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Basket;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderFormRequest;
-use App\Services\Basket\BasketService;
 use App\Services\Basket\OrderService;
-use Illuminate\Http\JsonResponse;
 
 class OrderSaveController extends Controller
 {
@@ -15,8 +13,10 @@ class OrderSaveController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function store(OrderFormRequest $request): JsonResponse
+    public function store(OrderFormRequest $request): OrderResponse
     {
-        return $this->orderService->saveOrder($request);
+        $data = $request->validated();
+        $order = $this->orderService->saveOrder($data);
+        return new OrderResponse($order);
     }
 }

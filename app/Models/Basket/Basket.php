@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Basket;
 
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
-use Psy\Util\Json;
 
 class Basket extends Model
 {

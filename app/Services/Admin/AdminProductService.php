@@ -3,7 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Http\Requests\Product\ProductRequest;
-use App\Models\Product;
+use App\Models\Product\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 

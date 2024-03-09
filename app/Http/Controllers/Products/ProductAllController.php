@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use App\Services\Products\ProductService;
-use Illuminate\Http\Resources\Json\ResourceCollection;
-
 
 class ProductAllController extends Controller
 {
@@ -14,8 +12,10 @@ class ProductAllController extends Controller
         $this->productService = $productService;
     }
     //Получаем все товары
-    public function store(): ResourceCollection
+    public function store(): ProductResponse
     {
-        return $this->productService->getAllProducts();
+        $product = $this->productService->getAllProducts();
+        return new ProductResponse($product);
+
     }
 }

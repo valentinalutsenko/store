@@ -14,8 +14,9 @@ class AdminAddProductController extends Controller
     {
         $this->productAdminService = $productAdminService;
     }
-    public function store(ProductRequest $request): JsonResponse
+    public function store(ProductRequest $request): ProductResponse
     {
-        return $this->productAdminService->addProduct($request);
+        $product = $this->productAdminService->addProduct($request);
+        return new ProductResponse($product);
     }
 }

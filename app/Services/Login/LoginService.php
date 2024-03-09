@@ -2,10 +2,10 @@
 
 namespace App\Services\Login;
 
-use App\Http\Requests\LoginRequest;
-use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\Login\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class LoginService

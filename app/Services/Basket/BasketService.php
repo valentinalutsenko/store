@@ -2,7 +2,7 @@
 
 namespace App\Services\Basket;
 
-use App\Models\Basket;
+use App\Models\Basket\Basket;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

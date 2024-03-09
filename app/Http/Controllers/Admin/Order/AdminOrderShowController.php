@@ -11,8 +11,9 @@ class AdminOrderShowController extends Controller
     {
         $this->adminOrderService = $adminOrderService;
     }
-    public function show()
+    public function show(): OrderResponse
     {
-        return $this->adminOrderService->showOrder();
+        $order = $this->adminOrderService->showOrder();
+        return new OrderResponse($order);
     }
 }

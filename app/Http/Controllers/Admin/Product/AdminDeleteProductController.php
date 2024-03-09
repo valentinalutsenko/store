@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\Product\Product;
 use App\Services\Admin\AdminProductService;
 use Illuminate\Http\JsonResponse;
 
@@ -14,8 +14,9 @@ class AdminDeleteProductController extends Controller
     {
         $this->productAdminService = $productAdminService;
     }
-    public function store(Product $product): JsonResponse
+    public function store(Product $product): ProductResponse
     {
-        return $this->productAdminService->deleteProduct($product);
+        $product = $this->productAdminService->deleteProduct($product);
+        return new ProductResponse($product);
     }
 }

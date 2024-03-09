@@ -2,7 +2,7 @@
 
 namespace App\Services\Admin;
 
-use App\Models\OrderItem;
+use App\Models\Order\OrderItem;
 
 class AdminOrderService
 {

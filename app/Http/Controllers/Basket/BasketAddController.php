@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Basket;
 
 use App\Http\Controllers\Controller;
 use App\Services\Basket\BasketService;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BasketAddController extends Controller
@@ -14,8 +13,9 @@ class BasketAddController extends Controller
         $this->basketService = $basketService;
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): BasketResponse
     {
-        return $this->basketService->addBasket($request);
+        $basket = $this->basketService->addBasket($request);
+        return new BasketResponse($basket);
     }
 }

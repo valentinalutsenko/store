@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Register;
+
+use App\Http\Requests\BaseRequest;
 
 class RegisterRequest extends BaseRequest
 {
