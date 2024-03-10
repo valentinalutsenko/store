@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Product\ProductResource;
 use App\Services\Products\ProductService;
 
 class ProductController extends Controller
@@ -12,9 +13,9 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
     //Получаем один товар
-    public function store($id): ProductResponse
+    public function store($id): ProductResource
     {
         $product = $this->productService->getProduct($id);
-        return new ProductResponse($product);
+        return new ProductResource($product);
     }
 }

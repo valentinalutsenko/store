@@ -6,6 +6,7 @@ use App\Http\Requests\Order\OrderFormRequest;
 use App\Models\Basket\Basket;
 use App\Models\Order\Order;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class OrderService
 {
@@ -14,7 +15,7 @@ class OrderService
         //Если валидация пройдена успешно, сохраняем заказ в бд
         $basket = new Basket();
         $basket->getBasket();
-        $user_id = auth()->check() ? auth()->user()->id: null;
+        $user_id = Auth::check() ? Auth::id(): null;
 
         $order = Order::create(
             $data->all() + ['amount' => $basket->getAmount(), 'user_id' => $user_id]

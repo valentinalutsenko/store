@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Order;
 
 use App\Http\Controllers\Controller;
 use App\Services\Admin\AdminOrderService;
+use Illuminate\Database\Eloquent\Collection;
 
 class AdminOrderShowController extends Controller
 {
@@ -11,9 +12,9 @@ class AdminOrderShowController extends Controller
     {
         $this->adminOrderService = $adminOrderService;
     }
-    public function show(): OrderResponse
+    public function show(): Collection
     {
-        $order = $this->adminOrderService->showOrder();
-        return new OrderResponse($order);
+        return $this->adminOrderService->showOrder();
+
     }
 }

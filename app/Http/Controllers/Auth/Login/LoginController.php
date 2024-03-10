@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Auth\Login;
 
-use App\Http\Controllers\Auth\LoginResponse;
-use App\Http\Controllers\Auth\LogoutResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Login\LoginRequest;
 use App\Services\Login\LoginService;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class LoginController extends Controller
@@ -15,9 +14,9 @@ class LoginController extends Controller
     {
         $this->loginService = $loginService;
     }
-    public function login(LoginRequest $request): LoginResponse
+    public function login(LoginRequest $request): Response
     {
-        $login =  $this->loginService->loginUser($request);
-        return new LoginResponse($login);
+       return $this->loginService->loginUser($request);
+
     }
 }

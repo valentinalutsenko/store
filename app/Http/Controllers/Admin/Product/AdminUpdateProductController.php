@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
+use App\Http\Resources\Product\ProductResource;
 use App\Models\Product\Product;
 use App\Services\Admin\AdminProductService;
+use Illuminate\Http\JsonResponse;
 
 
 class AdminUpdateProductController extends Controller
@@ -14,9 +16,9 @@ class AdminUpdateProductController extends Controller
     {
         $this->productAdminService = $productAdminService;
     }
-    public function store(ProductRequest $request, Product $product): ProductResponse
+    public function store(ProductRequest $request, Product $product): ProductResource
     {
         $product = $this->productAdminService->updateProduct($request, $product);
-        return new ProductResponse($product);
+        return new ProductResource($product);
     }
 }
