@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Auth\Logout;
 
-use App\Http\Controllers\Auth\LogoutResponse;
 use App\Http\Controllers\Controller;
 use App\Services\Login\LoginService;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-
 
 class LogoutController extends Controller
 {
@@ -15,8 +12,10 @@ class LogoutController extends Controller
         $this->loginService = $loginService;
     }
 
-    public function logout(): RedirectResponse
+    public function logout(): LoginResource
     {
-       return $this->loginService->logout();
+        $login = $this->loginService->logout();
+
+        return new LoginResource($login);
     }
 }

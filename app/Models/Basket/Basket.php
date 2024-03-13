@@ -24,18 +24,19 @@ class Basket extends Model
         foreach ($this->products as $product) {
             $amount = $amount + $product->price * $product->pivot->quantity;
         }
+
         return $amount;
     }
+
     // Возвращает объект корзины, если не найден — создает новый
     public function getBasket()
     {
         $basket_id = request()->cookie('basket_id');
-        if(!empty($basket_id)) {
+        if (! empty($basket_id)) {
             $this->basket = Basket::find($basket_id);
         } else {
             $this->basket = Basket::create();
         }
         Cookie::queue('basket_id', $this->basket->id);
     }
-
 }

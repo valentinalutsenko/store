@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Product;
 
+use App\DTO\Product\ProductDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\ProductRequest;
 use App\Http\Resources\Product\ProductResource;
+use App\Models\Product\Product;
 use App\Services\Admin\AdminProductService;
-use Illuminate\Support\Collection;
 
 class AdminProductController extends Controller
 {
@@ -13,9 +15,32 @@ class AdminProductController extends Controller
     {
         $this->productAdminService = $productAdminService;
     }
-    public function show(): ProductResource
+
+    public function index(): ProductResource
     {
         $product = $this->productAdminService->getAllProduct();
+
+        return new ProductResource($product);
+    }
+
+    public function add(ProductDTO $request): ProductResource
+    {
+        $product = $this->productAdminService->addProduct($request);
+
+        return new ProductResource($product);
+    }
+
+    public function update(ProductRequest $request, Product $product): ProductResource
+    {
+        $product = $this->productAdminService->updateProduct($request, $product);
+
+        return new ProductResource($product);
+    }
+
+    public function delete(Product $product): ProductResource
+    {
+        $product = $this->productAdminService->deleteProduct($product);
+
         return new ProductResource($product);
     }
 }

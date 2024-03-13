@@ -17,6 +17,7 @@ class OrderSaveController extends Controller
     public function store(OrderFormRequest $request): JsonResponse
     {
         $data = $request->validated();
+
         return $this->orderService->saveOrder($data);
     }
 }

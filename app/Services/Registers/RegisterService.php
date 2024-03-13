@@ -2,16 +2,18 @@
 
 namespace App\Services\Registers;
 
+use App\DTO\Register\RegisterData;
 use App\Models\User\User;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class RegisterService
 {
-    public function registerUser($data): Response
+    /**
+     * @param RegisterData $data
+     * @return array
+     */
+    public function registerUser(RegisterData $data): array
     {
-        $user = User::create($data);
-        return response()->json('Учетная запись успешно зарегестированна', 200);
+        return User::create($data->toArray());
     }
 }
-

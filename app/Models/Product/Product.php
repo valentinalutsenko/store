@@ -12,18 +12,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Product extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'description',
         'price',
         'image',
-        'category_id'
+        'category_id',
+        'count',
     ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
+
     public function baskets(): BelongsToMany
     {
         return $this->belongsToMany(Basket::class)->withPivot('quantity');

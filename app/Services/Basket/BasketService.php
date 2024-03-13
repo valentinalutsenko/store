@@ -14,23 +14,23 @@ class BasketService
         $basket_id = $request->cookie('basket_id');
         $quantity = $request->query('quantity') ?? 1;
 
-        if(empty($basket_id)) {
+        if (empty($basket_id)) {
             //Если корзины не сущесвует - создаем объект корзины
             $basket = Basket::create();
             $basket_id = $basket->id; //получаем идентификатор, чтобы записать в cookie
-        }else {
+        } else {
             // Если корзина уже существует, получаем объект корзины
             $basket = Basket::find($basket_id);
             // обновляем поле updated_at таблицы baskets
             $basket->touch();
         }
 
-        if($basket->products->contains($request)) {
+        if ($basket->products->contains($request)) {
             // если такой товар есть в корзине — изменяем кол-во
             $pivotRow = $basket->products->where('product_id', $request->id)->first()->pivot;
             $quantity = $pivotRow->quantity + $quantity;
             $pivotRow->update(['quantity' => $quantity]);
-        }else {
+        } else {
             $basket->products()->attach($request->id, ['quantity' => $quantity]);
         }
 

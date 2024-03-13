@@ -12,10 +12,19 @@ class ProductController extends Controller
     {
         $this->productService = $productService;
     }
+
     //Получаем один товар
     public function store($id): ProductResource
     {
         $product = $this->productService->getProduct($id);
+
+        return new ProductResource($product);
+    }
+
+    public function index(): ProductResource
+    {
+        $product = $this->productService->getAllProducts();
+
         return new ProductResource($product);
     }
 }

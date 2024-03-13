@@ -12,9 +12,9 @@ class AdminOrderShowController extends Controller
     {
         $this->adminOrderService = $adminOrderService;
     }
+
     public function show(): Collection
     {
         return $this->adminOrderService->showOrder();
-
     }
 }

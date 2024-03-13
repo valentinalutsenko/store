@@ -5,24 +5,25 @@ namespace App\Services\Login;
 use App\Http\Requests\Login\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
-
 
 class LoginService
 {
-    public function loginUser(LoginRequest $request): Response
+    /**
+     * @return array|bool
+     */
+    public function loginUser(LoginRequest $request): array
     {
         $credentials = $request->only('email', 'password');
 
-        if(!Auth::attempt($credentials)){
-            return response()->json('Данные введены неверно!', 400);
-        };
-
-        if(Auth::check() && Auth::user()->is_admin) {
-            return response()->json('Вы успешно вошли на страницу администатора!', 200);
+        if (! Auth::attempt($credentials)) {
+            return false;
         }
 
-        return response()->json('Вы успешно автризовались!', 200);
+        if (Auth::check() && Auth::user()->is_admin) {
+            return true;
+        }
+
+        return $credentials;
     }
 
     public function logout(): RedirectResponse
@@ -32,4 +33,3 @@ class LoginService
         return redirect('login');
     }
 }
-
