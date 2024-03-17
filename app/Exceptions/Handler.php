@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\User\InvalidUserCredentialsException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -38,13 +38,11 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (InvalidUserCredentialsException $e) {
+            return responseFailed($e->getMessage(), 401);
         });
     }
 }

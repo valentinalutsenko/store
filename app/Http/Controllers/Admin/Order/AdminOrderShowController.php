@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Order;
 
 use App\Http\Controllers\Controller;
-use App\Services\Admin\AdminOrderService;
+use App\Services\Admin\Order\AdminOrderService;
 use Illuminate\Database\Eloquent\Collection;
 
 class AdminOrderShowController extends Controller

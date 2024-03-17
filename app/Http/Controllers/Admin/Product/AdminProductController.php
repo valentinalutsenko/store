@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product\Product;
-use App\Services\Admin\AdminProductService;
+use App\Services\Admin\Product\AdminProductService;
 
 class AdminProductController extends Controller
 {

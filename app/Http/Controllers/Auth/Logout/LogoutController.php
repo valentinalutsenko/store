@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth\Logout;
 
 use App\Http\Controllers\Controller;
-use App\Services\Login\LoginService;
+use App\Services\Login\LoginUserService;
 
 class LogoutController extends Controller
 {
-    public function __construct(private LoginService $loginService)
+    public function __construct(private LoginUserService $loginService)
     {
         $this->loginService = $loginService;
     }

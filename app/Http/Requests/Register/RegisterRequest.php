@@ -10,10 +10,10 @@ class RegisterRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:users,name',
-            'email' => 'required|email:rfc,dns|unique:users,email',
-            'password' => 'required|min:8',
-            'password_confirmation' => 'required|same:password',
+            'name' => ['required', 'max:255'],
+            'login' => ['required', 'unique:users,login'],
+            'email' => ['required', 'unique:users,email', 'max:255'],
+            'password' => ['required', 'min:5', 'confirmed'],
         ];
     }
 
