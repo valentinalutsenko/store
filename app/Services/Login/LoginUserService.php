@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class LoginUserService
 {
     /**
-     * @param LoginData $data
-     * @return array
      * @throws InvalidUserCredentialsException
      */
     public function loginUser(LoginData $data): array
@@ -24,9 +22,6 @@ class LoginUserService
         return ['token' => $token->plainTextToken];
     }
 
-    /**
-     * @return RedirectResponse
-     */
     public function logout(): RedirectResponse
     {
         Auth::logout();

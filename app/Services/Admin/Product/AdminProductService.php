@@ -2,45 +2,69 @@
 
 namespace App\Services\Admin\Product;
 
-use App\Http\Requests\Product\ProductRequest;
+use App\DTO\Product\ProductData;
+use App\Models\Category\Category;
 use App\Models\Product\Product;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
 
 class AdminProductService
 {
-    //Просмотр всех товаров
-
-    public function getAllProduct(): Collection
+    /**
+     * @return array
+     */
+    public function getAllProduct(): array
     {
-        return Product::all();
+        return Product::paginate(10)->toArray();
     }
 
-    //Создает новый товар
-
-    public function addProduct(ProductRequest $request): JsonResponse
+    /**
+     * @param ProductData $data
+     * @return Product
+     */
+    public function createProduct(ProductData $data): Product
     {
-        $data = $request->all();
-        $product = Product::create($data);
-
-        return response()->json('Новый товар успешно создан!', 200);
+        return Product::create($data->toArray());
     }
 
-    //Обновляет товар
-
-    public function updateProduct(ProductRequest $request, Product $product): JsonResponse
+    /**
+     * @param ProductData $data
+     * @param int $categoryId
+     * @param Product $product
+     * @param int $productId
+     * @return Product
+     */
+    public function editProduct(
+        ProductData $data,
+        int $categoryId,
+        Product $product,
+        int $productId): Product
     {
-        $data = $request->all();
-        $product->update($data);
+        if ($categoryId) {
+            $category = Category::findOrFail($categoryId);
+            $product->category()->associate($category);
+        }
+        $updateProduct = Product::findOrFail($productId);
+        $updateProduct->fill([
+            $updateProduct->title = $data->title,
+            $updateProduct->price = $data->price,
+            $updateProduct->description = $data->description,
+            $updateProduct->count = $data->count,
+            $updateProduct->category_id = $data->category_id,
+        ]);
+        $updateProduct->save();
 
-        return response()->json('Товар был успешно обновлен!', 200);
+        return $updateProduct;
     }
-    //Удаляет товар
 
-    public function deleteProduct(Product $product): JsonResponse
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function deleteProduct(int $id): bool
     {
-        $product->delete();
+        if ($id) {
+            Product::findOrFail($id)->delete();
+        }
 
-        return response()->json('Товар каталога успешно удален!', 200);
+        return true; //Что должен возвращать метод в таком случае? Ничего нагуглить не смогла)))
     }
 }

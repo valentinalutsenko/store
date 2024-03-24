@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class LoginAdminService
 {
     /**
-     * @param LoginData $data
-     * @return array
      * @throws InvalidUserCredentialsException
      */
     public function loginAdmin(LoginData $data): array

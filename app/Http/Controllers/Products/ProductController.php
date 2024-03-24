@@ -13,8 +13,7 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    //Получаем один товар
-    public function store($id): ProductResource
+    public function show(int $id): ProductResource
     {
         $product = $this->productService->getProduct($id);
 

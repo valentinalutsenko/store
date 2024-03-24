@@ -2,21 +2,17 @@
 
 namespace App\Services\Products;
 
-use App\Http\Resources\Product\ProductResource;
 use App\Models\Product\Product;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductService
 {
-    public function getAllProducts(): ResourceCollection
+    public function getAllProducts(): array
     {
-        $products = Product::all();
-
-        return ProductResource::collection($products);
+        return Product::paginate(10)->toArray();
     }
 
-    public function getProduct($id): object
+    public function getProduct(int $id): object
     {
-        return Product::find($id);
+        return Product::find($id)->toArray();
     }
 }
