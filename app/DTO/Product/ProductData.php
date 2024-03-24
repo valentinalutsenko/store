@@ -14,6 +14,12 @@ class ProductData extends Data
         public int $count,
         public int $category_id,
     ) {
+        $this->title = $title;
+        $this->price = $price;
+        $this->description = $description;
+        $this->image = $image;
+        $this->count = $count;
+        $this->category_id = $category_id;
     }
 
     public function getTitle(): string
