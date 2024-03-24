@@ -22,6 +22,9 @@ class LoginUserService
         return ['token' => $token->plainTextToken];
     }
 
+    /**
+     * @return RedirectResponse
+     */
     public function logout(): RedirectResponse
     {
         Auth::logout();

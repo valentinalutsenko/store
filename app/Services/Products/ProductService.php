@@ -6,11 +6,18 @@ use App\Models\Product\Product;
 
 class ProductService
 {
+    /**
+     * @return array
+     */
     public function getAllProducts(): array
     {
         return Product::paginate(10)->toArray();
     }
 
+    /**
+     * @param int $id
+     * @return object
+     */
     public function getProduct(int $id): object
     {
         return Product::find($id)->toArray();
