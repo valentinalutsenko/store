@@ -3,37 +3,42 @@
 namespace App\Services\Basket;
 
 use App\Models\Basket\Basket;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Models\Product\Product;
 
 class BasketService
 {
     //Добавляем товар в корзину
-    public function addBasket(Request $request): JsonResponse
+    /**
+     * @param $productId
+     * @return mixed
+     */
+    public function addBasket($productId)
     {
-        $basket_id = $request->cookie('basket_id');
-        $quantity = $request->query('quantity') ?? 1;
+        $product = Product::findOrFail($productId);
 
-        if (empty($basket_id)) {
-            //Если корзины не сущесвует - создаем объект корзины
-            $basket = Basket::create();
-            $basket_id = $basket->id; //получаем идентификатор, чтобы записать в cookie
+        $basket = Basket::where(['product_id' => $product->id, 'user_id' => auth()->user()?->id])->first();
+
+        if ($basket) {
+            $basket->quantity++;
+            $basket->save();
         } else {
-            // Если корзина уже существует, получаем объект корзины
-            $basket = Basket::find($basket_id);
-            // обновляем поле updated_at таблицы baskets
-            $basket->touch();
+            $basket = Basket::create([
+                'quantity' => 1,
+                'price' => $product->price,
+                'product_id' => $product->id,
+                'user_id' => auth()->user()?->id,
+            ]);
         }
 
-        if ($basket->products->contains($request)) {
-            // если такой товар есть в корзине — изменяем кол-во
-            $pivotRow = $basket->products->where('product_id', $request->id)->first()->pivot;
-            $quantity = $pivotRow->quantity + $quantity;
-            $pivotRow->update(['quantity' => $quantity]);
-        } else {
-            $basket->products()->attach($request->id, ['quantity' => $quantity]);
-        }
+        return $basket;
+    }
 
-        return response()->json('Заказ успешно добавлен в корзину!', 200);
+    /**
+     * @param $id
+     * @return int
+     */
+    public function remove($id)
+    {
+        return Basket::destroy($id);
     }
 }

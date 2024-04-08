@@ -7,7 +7,11 @@ use Spatie\LaravelData\Data;
 
 class LoginData extends Data
 {
-    //Для необязательных параметров лучше использовать Optional, но он не импортируется
+    /**
+     * @param string|null $login
+     * @param string|null $email
+     * @param string $password
+     */
     public function __construct(
         public ?string $login,
         public ?string $email,

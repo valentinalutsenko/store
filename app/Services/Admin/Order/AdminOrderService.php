@@ -2,17 +2,18 @@
 
 namespace App\Services\Admin\Order;
 
-use App\Models\Order\OrderItem;
+use App\Models\OrderProduct\OrderProduct;
+use Illuminate\Database\Eloquent\Collection;
 
 class AdminOrderService
 {
     //Просмотр выполнненых заказов
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
-    public function showOrder()
+    public function showOrder(): Collection
     {
-        return OrderItem::all();
+        return OrderProduct::paginate(10);
     }
 }

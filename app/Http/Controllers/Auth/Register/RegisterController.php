@@ -9,11 +9,18 @@ use App\Services\Registers\RegisterService;
 
 class RegisterController extends Controller
 {
+    /**
+     * @param RegisterService $registerService
+     */
     public function __construct(private RegisterService $registerService)
     {
         $this->registerService = $registerService;
     }
 
+    /**
+     * @param RegisterRequest $request
+     * @return RegisterResource
+     */
     public function register(RegisterRequest $request): RegisterResource
     {
         $register = $this->registerService->register($request->data());

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Register;
+namespace App\Http\Resources\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RegisterResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * @param $request
@@ -17,6 +17,8 @@ class RegisterResource extends JsonResource
             'name' => $this->name,
             'login' => $this->login,
             'email' => $this->email,
+            'email_verified_at' => $this->email_verified_at,
+            'is_admin' => $this->is_admin,
             'password' => $this->password,
         ];
     }

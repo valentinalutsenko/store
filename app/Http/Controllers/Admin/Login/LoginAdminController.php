@@ -9,6 +9,9 @@ use Illuminate\Routing\Controller;
 
 class LoginAdminController extends Controller
 {
+    /**
+     * @param LoginAdminService $loginAdminService
+     */
     public function __construct(private LoginAdminService $loginAdminService)
     {
         $this->loginAdminService = $loginAdminService;

@@ -11,7 +11,7 @@ class ProductService
      */
     public function getAllProducts(): array
     {
-        return Product::paginate(10)->toArray();
+        return Product::paginate(10);
     }
 
     /**
@@ -20,6 +20,6 @@ class ProductService
      */
     public function getProduct(int $id): object
     {
-        return Product::find($id)->toArray();
+        return Product::find($id);
     }
 }

@@ -7,6 +7,9 @@ use App\Http\Requests\BaseRequest;
 
 class LoginRequest extends BaseRequest
 {
+    /**
+     * @return array[]
+     */
     public function rules(): array
     {
         return [
@@ -26,6 +29,9 @@ class LoginRequest extends BaseRequest
         ];
     }
 
+    /**
+     * @return LoginData
+     */
     public function data(): LoginData
     {
         return LoginData::from($this->validated());

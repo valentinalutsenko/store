@@ -7,6 +7,9 @@ use App\Http\Requests\BaseRequest;
 
 class RegisterRequest extends BaseRequest
 {
+    /**
+     * @return array[]
+     */
     public function rules(): array
     {
         return [
@@ -30,6 +33,9 @@ class RegisterRequest extends BaseRequest
         ];
     }
 
+    /**
+     * @return RegisterData
+     */
     public function data(): RegisterData
     {
         return RegisterData::from($this->validated());

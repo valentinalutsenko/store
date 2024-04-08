@@ -7,6 +7,9 @@ use App\Http\Requests\BaseRequest;
 
 class ProductRequest extends BaseRequest
 {
+    /**
+     * @return array[]
+     */
     public function rules(): array
     {
         return [
@@ -44,6 +47,9 @@ class ProductRequest extends BaseRequest
         ];
     }
 
+    /**
+     * @return ProductData
+     */
     public function data(): ProductData
     {
         return ProductData::from($this->validated());

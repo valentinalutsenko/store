@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
@@ -14,9 +19,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('address');
-            $table->string('comment')->nullable();
-            $table->decimal('amount', 10, 2)->unsigned();
-            $table->foreignId('user_id')
+            $table->enum('status', ['canceled', 'new', 'completed', 'delivered'])->default('new');
+            $table->decimal('amount', 10, 2)->default(0);
+
+            $table
+                ->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
@@ -24,7 +31,12 @@ return new class extends Migration
         });
     }
 
-    public function down(): void
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
         Schema::dropIfExists('orders');
     }

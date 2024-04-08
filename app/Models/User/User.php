@@ -3,7 +3,9 @@
 namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Order\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -25,13 +27,22 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
     //шифруем пароль
+
+    /**
+     * @param $value
+     * @return string
+     */
     public function setPasswordAttribute($value): string
     {
         return $this->attributes['password'] = bcrypt($value);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function order(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

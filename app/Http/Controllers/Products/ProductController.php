@@ -8,11 +8,18 @@ use App\Services\Products\ProductService;
 
 class ProductController extends Controller
 {
+    /**
+     * @param ProductService $productService
+     */
     public function __construct(private ProductService $productService)
     {
         $this->productService = $productService;
     }
 
+    /**
+     * @param int $id
+     * @return ProductResource
+     */
     public function show(int $id): ProductResource
     {
         $product = $this->productService->getProduct($id);
@@ -20,6 +27,9 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
+    /**
+     * @return ProductResource
+     */
     public function index(): ProductResource
     {
         $product = $this->productService->getAllProducts();

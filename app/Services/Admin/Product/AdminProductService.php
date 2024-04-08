@@ -13,7 +13,7 @@ class AdminProductService
      */
     public function getAllProduct(): array
     {
-        return Product::paginate(10)->toArray();
+        return Product::paginate(10);
     }
 
     /**
@@ -22,7 +22,7 @@ class AdminProductService
      */
     public function createProduct(ProductData $data): Product
     {
-        return Product::create($data->toArray());
+        return Product::create($data);
     }
 
     /**
