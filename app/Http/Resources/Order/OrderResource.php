@@ -21,8 +21,8 @@ class OrderResource extends JsonResource
             'address' => $this->address,
             'comment' => $this->comment,
             'amount' => $this->price,
-            'product_id' => new ProductResource($this->product_id),
-            'user_id' => new UserResource($this->user_id),
+            'product' => $this->relationLoaded('product') ? new ProductResource($this->product) : null,
+            'user' => $this->relationLoaded('user') ? new ProductResource($this->user) : null,
         ];
     }
 }

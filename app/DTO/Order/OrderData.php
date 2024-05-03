@@ -9,16 +9,16 @@ class OrderData extends Data
     /**
      * @param string $name
      * @param string $email
-     * @param string|null $phone
+     * @param string|Optional $phone
      * @param string $address
-     * @param int|null $amount
+     * @param int|Optional $amount
      */
     public function __construct(
         public string $name,
         public string $email,
-        public ?string $phone,
+        public string|Optional $phone,
         public string $address,
-        public ?int $amount,
+        public int|Optional $amount,
     ) {
         $this->name = $name;
         $this->email = $email;

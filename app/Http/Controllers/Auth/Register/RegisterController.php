@@ -23,7 +23,7 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request): RegisterResource
     {
-        $register = $this->registerService->register($request->data());
+        $register = $this->registerService->register($request->getDto());
 
         return new RegisterResource($register);
     }

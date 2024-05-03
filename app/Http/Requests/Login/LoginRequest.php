@@ -13,26 +13,13 @@ class LoginRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'login' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-            'email' => [
-                'nullable',
-                'email',
-                'max:255',
-            ],
-            'password' => [
-                'required',
-            ],
+            'login' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'password' => 'required',
         ];
     }
 
-    /**
-     * @return LoginData
-     */
-    public function data(): LoginData
+    public function getDto(): LoginData
     {
         return LoginData::from($this->validated());
     }

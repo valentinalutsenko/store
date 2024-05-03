@@ -18,13 +18,13 @@ return new class extends Migration
             $table->integer('quantity')->default(0);
             $table->unsignedInteger('price')->default(0);
             $table
-                ->foreignId('product_id')
-                ->constrained('products')
+                ->foreignId('user_id')
+                ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table
-                ->foreignId('user_id')
-                ->constrained('users')
+                ->foreignId('product_id')
+                ->constrained('products')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

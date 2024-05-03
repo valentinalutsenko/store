@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'image' => $this->image,
             'count' => $this->count,
-            'category' => new CategoryResource($this->category),
+            'category' => $this->relationLoaded('category') ? new ProductResource($this->category) : null,
         ];
     }
 }

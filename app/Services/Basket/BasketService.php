@@ -8,11 +8,12 @@ use App\Models\Product\Product;
 class BasketService
 {
     //Добавляем товар в корзину
+
     /**
      * @param $productId
-     * @return mixed
+     * @return array
      */
-    public function addBasket($productId)
+    public function addBasket($productId): array
     {
         $product = Product::findOrFail($productId);
 
@@ -29,12 +30,12 @@ class BasketService
                 'user_id' => auth()->user()?->id,
             ]);
         }
+        $basket->products()->attach($product->id);
 
         return $basket;
     }
 
     /**
-     * @param $id
      * @return int
      */
     public function remove($id)

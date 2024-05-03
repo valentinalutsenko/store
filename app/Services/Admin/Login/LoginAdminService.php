@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginAdminService
 {
+
     /**
-     * @throws InvalidUserCredentialsException
+     * @param LoginData $data
+     * @return array
      */
     public function loginAdmin(LoginData $data): array
     {
-        if (! Auth::check() && Auth::user()->is_admin) {
-            throw new InvalidUserCredentialsException('Invalid user credentials');
+        if (Auth::check() && Auth::user()->is_admin) {
+            $token = auth()->user()->createToken('api_login');
         }
-        $token = auth()->user()->createToken('api_login');
 
         return ['token' => $token->plainTextToken];
     }

@@ -27,12 +27,14 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
+
     /**
+     * @param int $page
      * @return ProductResource
      */
-    public function index(): ProductResource
+    public function index(int $page): ProductResource
     {
-        $product = $this->productService->getAllProducts();
+        $product = $this->productService->getAllProducts($page);
 
         return new ProductResource($product);
     }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Basket;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Basket\BasketResource;
 use App\Services\Basket\BasketService;
-use Illuminate\Http\Request;
 
 class BasketController extends Controller
 {
@@ -18,24 +17,22 @@ class BasketController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param int $productId
      * @return BasketResource
      */
-    public function store(Request $request): BasketResource
+    public function store(int $productId): BasketResource
     {
-        $productId = $request->id;
         $basket = $this->basketService->addBasket($productId);
 
         return new BasketResource($basket);
     }
 
     /**
-     * @param Request $request
+     * @param int $id
      * @return BasketResource
      */
-    public function destroy(Request $request)
+    public function destroy(int $id): BasketResource
     {
-        $id = $request->id;
         $basket = $this->basketService->remove($id);
 
         return new BasketResource($basket);

@@ -20,11 +20,10 @@ class LoginUserController extends Controller
     /**
      * @param LoginRequest $request
      * @return LoginResource
-     * @throws \App\Exceptions\User\InvalidUserCredentialsException
      */
     public function login(LoginRequest $request): LoginResource
     {
-        $login = $this->loginUserService->loginUser($request->data());
+        $login = $this->loginUserService->loginUser($request->getDto());
 
         return new LoginResource($login);
     }

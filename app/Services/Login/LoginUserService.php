@@ -3,21 +3,20 @@
 namespace App\Services\Login;
 
 use App\DTO\Login\LoginData;
-use App\Exceptions\User\InvalidUserCredentialsException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class LoginUserService
 {
     /**
-     * @throws InvalidUserCredentialsException
+     * @param LoginData $data
+     * @return array
      */
     public function loginUser(LoginData $data): array
     {
-        if (! auth()->guard('web')->attempt($data->toArray())) {
-            throw new InvalidUserCredentialsException('Invalid user credentials');
+        if (auth()->guard('web')->attempt($data->toArray())) {
+            $token = auth()->user()->createToken('api_login');
         }
-        $token = auth()->user()->createToken('api_login');
 
         return ['token' => $token->plainTextToken];
     }

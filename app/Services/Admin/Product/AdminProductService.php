@@ -8,12 +8,14 @@ use App\Models\Product\Product;
 
 class AdminProductService
 {
+
     /**
+     * @param int $page
      * @return array
      */
-    public function getAllProduct(): array
+    public function getAllProduct(int $page): array
     {
-        return Product::paginate(10);
+        return Product::paginate($page);
     }
 
     /**
@@ -27,22 +29,18 @@ class AdminProductService
 
     /**
      * @param ProductData $data
-     * @param int $categoryId
      * @param Product $product
-     * @param int $productId
      * @return Product
      */
     public function editProduct(
         ProductData $data,
-        int $categoryId,
         Product $product,
-        int $productId): Product
-    {
-        if ($categoryId) {
-            $category = Category::findOrFail($categoryId);
+    ): Product {
+        if ($data->category_id) {
+            $category = Category::findOrFail($data->category_id);
             $product->category()->associate($category);
         }
-        $updateProduct = Product::findOrFail($productId);
+        $updateProduct = Product::findOrFail($product->id);
         $updateProduct->fill([
             $updateProduct->title = $data->title,
             $updateProduct->price = $data->price,
@@ -61,10 +59,6 @@ class AdminProductService
      */
     public function deleteProduct(int $id): bool
     {
-        if ($id) {
-            Product::findOrFail($id)->delete();
-        }
-
-        return true; //Что должен возвращать метод в таком случае? Ничего нагуглить не смогла)))
+        return Product::where('id', $id)->delete();
     }
 }

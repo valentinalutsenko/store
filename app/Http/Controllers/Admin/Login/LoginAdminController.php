@@ -18,7 +18,8 @@ class LoginAdminController extends Controller
     }
 
     /**
-     * @throws \App\Exceptions\User\InvalidUserCredentialsException
+     * @param LoginRequest $request
+     * @return LoginResource
      */
     public function login(LoginRequest $request): LoginResource
     {

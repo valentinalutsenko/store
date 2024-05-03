@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Order\OrderFormRequest;
+use App\Http\Requests\Order\OrderRequest;
 use App\Http\Resources\Order\OrderResource;
 use App\Services\Order\OrderService;
 
@@ -18,12 +18,12 @@ class OrderController extends Controller
     }
 
     /**
-     * @param OrderFormRequest $request
+     * @param OrderRequest $request
      * @return OrderResource
      */
-    public function store(OrderFormRequest $request): OrderResource
+    public function store(OrderRequest $request): OrderResource
     {
-        $order = $this->orderService->createOrder($request->data());
+        $order = $this->orderService->createOrder($request->getDto());
 
         return new OrderResource($order);
     }

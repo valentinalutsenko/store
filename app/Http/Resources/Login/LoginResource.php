@@ -16,7 +16,6 @@ class LoginResource extends JsonResource
             'id' => $this->id,
             'login' => $this->login,
             'email' => $this->email,
-            'password' => $this->password,
         ];
     }
 }

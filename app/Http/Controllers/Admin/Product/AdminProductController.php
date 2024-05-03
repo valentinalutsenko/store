@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Product;
 
+use App\DTO\Product\ProductData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
 use App\Http\Resources\Product\ProductResource;
@@ -19,12 +20,14 @@ class AdminProductController extends Controller
         $this->productAdminService = $productAdminService;
     }
 
+
     /**
+     * @param int $page
      * @return ProductResource
      */
-    public function index(): ProductResource
+    public function index(int $page): ProductResource
     {
-        $product = $this->productAdminService->getAllProduct();
+        $product = $this->productAdminService->getAllProduct($page);
 
         return new ProductResource($product);
     }
@@ -35,34 +38,32 @@ class AdminProductController extends Controller
      */
     public function store(ProductRequest $request): ProductResource
     {
-        $product = $this->productAdminService->createProduct($request->data());
+        $product = $this->productAdminService->createProduct($request->getDto());
 
         return new ProductResource($product);
     }
+
 
     /**
      * @param ProductRequest $request
      * @param Product $product
      * @return ProductResource
      */
-    public function edit(ProductRequest $request, Product $product): ProductResource
+    public function update(ProductRequest $request, Product $product): ProductResource
     {
-        $productId = $request->get('id');
-        $categoryId = $request->get('category_id');
-        $productEdit = $this->productAdminService->editProduct($request->data(), $categoryId, $product, $productId);
+        $productUpdate = $this->productAdminService->editProduct($request->getDto(), $product);
 
-        return new ProductResource($productEdit);
+        return new ProductResource($productUpdate);
     }
 
     /**
-     * @param ProductRequest $request
+     * @param $id
      * @return Response
      */
-    public function destroy(ProductRequest $request): Response
+    public function destroy($id): Response
     {
-        $id = $request->get('id');
         $this->productAdminService->deleteProduct($id);
 
-        return response(null, 204)->noContent();
+        return response()->noContent();
     }
 }

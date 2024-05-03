@@ -13,44 +13,16 @@ class ProductRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'title' => [
-                'required',
-                'string',
-                'min:5', '
-                 max:128',
-                'unique:products,title',
-            ],
-            'price' => [
-                'required',
-                'integer',
-                'min:1',
-            ],
-            'description' => [
-                'nullable',
-                'string',
-                'min:10',
-            ],
-            'image' => [
-                'nullable',
-                'string',
-            ],
-            'count' => [
-                'required',
-                'integer',
-                'min:1',
-            ],
-            'category_id' => [
-                'required',
-                'integer',
-                'min:1',
-            ],
+            'title' => 'required|string|min:5|max:128',
+            'price' => 'required|integer|min:1',
+            'description' => 'nullable|string|min:10',
+            'image' => 'nullable|string',
+            'count' => 'required|integer|min:1',
+            'category_id' => 'required|integer|min:1',
         ];
     }
 
-    /**
-     * @return ProductData
-     */
-    public function data(): ProductData
+    public function getDto(): ProductData
     {
         return ProductData::from($this->validated());
     }

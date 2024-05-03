@@ -7,11 +7,12 @@ use App\Models\Product\Product;
 class ProductService
 {
     /**
+     * @param int $page
      * @return array
      */
-    public function getAllProducts(): array
+    public function getAllProducts(int $page): array
     {
-        return Product::paginate(10);
+        return Product::paginate($page);
     }
 
     /**

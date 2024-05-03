@@ -3,7 +3,6 @@
 namespace App\Http\Resources\Basket;
 
 use App\Http\Resources\Product\ProductResource;
-use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BasketResource extends JsonResource
@@ -17,8 +16,7 @@ class BasketResource extends JsonResource
         return [
             'quantity' => $this->quantity,
             'price' => $this->price,
-            'product_id' => new ProductResource($this->product_id),
-            'user_id' => new UserResource($this->user_id),
+            'user' => $this->relationLoaded('user') ? new ProductResource($this->user) : null,
         ];
     }
 }

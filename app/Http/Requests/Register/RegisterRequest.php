@@ -13,30 +13,14 @@ class RegisterRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'max:255',
-            ],
-            'login' => [
-                'required',
-                'unique:users,login',
-            ],
-            'email' => [
-                'required',
-                'unique:users,email',
-                'max:255',
-            ],
-            'password' => [
-                'required',
-                'min:5', 'confirmed',
-            ],
+            'login' => 'nullable|unique:users,login',
+            'email' => 'nullable|unique:users,email',
+            'password' => 'required|min:5|confirmed',
+            'name' => 'required|max:255',
         ];
     }
 
-    /**
-     * @return RegisterData
-     */
-    public function data(): RegisterData
+    public function getDto(): RegisterData
     {
         return RegisterData::from($this->validated());
     }
