@@ -26,12 +26,12 @@ git clone https://github.com/valentinalutsenko/store.git
 
 5. Настройте учетные данные вашей базы данных
 
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=laravel
-    DB_USERNAME=root
-    DB_PASSWORD=
+    DB_CONNECTION=mysql  
+    DB_HOST=127.0.0.1  
+    DB_PORT=3306  
+    DB_DATABASE=laravel  
+    DB_USERNAME=root  
+    DB_PASSWORD=  
 
 6. Запустите миграцию
 
