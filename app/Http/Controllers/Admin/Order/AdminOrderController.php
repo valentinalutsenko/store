@@ -19,12 +19,12 @@ class AdminOrderController extends Controller
 
 
     /**
-     * @param int $page
+     * @param int $count
      * @return OrderResource
      */
-    public function show(int $page): OrderResource
+    public function show(int $count): OrderResource
     {
-        $order = $this->adminOrderService->showOrder($page);
+        $order = $this->adminOrderService->showOrder($count);
 
         return new OrderResource($order);
     }

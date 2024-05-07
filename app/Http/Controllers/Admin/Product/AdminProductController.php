@@ -22,12 +22,12 @@ class AdminProductController extends Controller
 
 
     /**
-     * @param int $page
+     * @param int $count
      * @return ProductResource
      */
-    public function index(int $page): ProductResource
+    public function index(int $count): ProductResource
     {
-        $product = $this->productAdminService->getAllProduct($page);
+        $product = $this->productAdminService->getAllProduct($count);
 
         return new ProductResource($product);
     }

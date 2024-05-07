@@ -19,7 +19,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginUserController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout']);
 //Товары
-Route::get('/products/{page}', [ProductController::class, 'index']);
+Route::get('/products/{page}/{count}', [ProductController::class, 'index']);
 Route::get('/product/{id}', [ProductController::class, 'show']);
 //Корзина
 Route::post('/basket/add/{id}', [BasketController::class, 'store']);
@@ -28,9 +28,9 @@ Route::post('/order/createOrder', [OrderController::class, 'store']);
 //Admin
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [LoginUserController::class, 'login']);
-    Route::get('/products/{page}', [AdminProductController::class, 'index']);
+    Route::get('/products/{page}/{count}', [AdminProductController::class, 'index']);
     Route::post('/product/create', [AdminProductController::class, 'store']);
     Route::put('/product/update', [AdminProductController::class, 'update']);
     Route::delete('/product/{id}', [AdminProductController::class, 'destroy']);
-    Route::get('/order/orderItems/{page}', [AdminOrderController::class, 'show']);
+    Route::get('/order/orderItems/{page}/{count}', [AdminOrderController::class, 'show']);
 });

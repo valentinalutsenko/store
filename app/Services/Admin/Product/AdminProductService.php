@@ -10,12 +10,12 @@ class AdminProductService
 {
 
     /**
-     * @param int $page
+     * @param int $count
      * @return array
      */
-    public function getAllProduct(int $page): array
+    public function getAllProduct(int $count): array
     {
-        return Product::paginate($page);
+        return Product::paginate($count);
     }
 
     /**

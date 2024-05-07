@@ -7,12 +7,12 @@ use App\Models\Product\Product;
 class ProductService
 {
     /**
-     * @param int $page
+     * @param int $count
      * @return array
      */
-    public function getAllProducts(int $page): array
+    public function getAllProducts(int $count): array
     {
-        return Product::paginate($page);
+        return Product::paginate($count);
     }
 
     /**

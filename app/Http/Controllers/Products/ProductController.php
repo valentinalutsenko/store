@@ -29,12 +29,12 @@ class ProductController extends Controller
 
 
     /**
-     * @param int $page
+     * @param int $count
      * @return ProductResource
      */
-    public function index(int $page): ProductResource
+    public function index(int $count): ProductResource
     {
-        $product = $this->productService->getAllProducts($page);
+        $product = $this->productService->getAllProducts($count);
 
         return new ProductResource($product);
     }

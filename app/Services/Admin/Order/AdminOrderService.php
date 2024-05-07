@@ -11,11 +11,11 @@ class AdminOrderService
     //Просмотр выполнненых заказов
 
     /**
-     * @param int $page
+     * @param int $count
      * @return Collection
      */
-    public function showOrder(int $page): Collection
+    public function showOrder(int $count): Collection
     {
-        return OrderProduct::paginate($page);
+        return OrderProduct::paginate($count);
     }
 }
