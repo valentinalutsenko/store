@@ -32,5 +32,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/product/create', [AdminProductController::class, 'store']);
     Route::put('/product/update', [AdminProductController::class, 'update']);
     Route::delete('/product/{id}', [AdminProductController::class, 'destroy']);
-    Route::post('/order/orderItems/{page}', [AdminOrderController::class, 'show']);
+    Route::get('/order/orderItems/{page}', [AdminOrderController::class, 'show']);
 });
